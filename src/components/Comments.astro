@@ -1,0 +1,31 @@
+---
+// Blog comments via giscus (GitHub Discussions). Renders nothing until the
+// repo/category IDs are configured in src/giscus.config.ts, so it is safe to
+// ship before setup. Lazy-loaded; uses the site's light theme.
+import { giscus, giscusEnabled } from '../giscus.config';
+---
+
+{
+  giscusEnabled && (
+    <section class="max-w-2xl mx-auto px-6 pb-16" aria-label="Comments">
+      <h2 class="text-sm text-[--color-ink-dim] mb-4">Comments</h2>
+      <script
+        src="https://giscus.app/client.js"
+        data-repo={giscus.repo}
+        data-repo-id={giscus.repoId}
+        data-category={giscus.category}
+        data-category-id={giscus.categoryId}
+        data-mapping={giscus.mapping}
+        data-strict="0"
+        data-reactions-enabled={giscus.reactionsEnabled}
+        data-emit-metadata="0"
+        data-input-position={giscus.inputPosition}
+        data-theme={giscus.theme}
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async
+      />
+    </section>
+  )
+}

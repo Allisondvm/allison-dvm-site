@@ -1,21 +1,26 @@
-# Decap CMS configuration — visual editor for allisondvm.com
+# Sveltia CMS configuration — visual editor for allisondvm.com
 #
 # Backend: GitHub. Krista logs in with GitHub and edits content through a form
-# UI; Decap commits to this repo and CI rebuilds + deploys.
+# UI (works well on mobile); Sveltia commits to this repo and CI rebuilds +
+# deploys. Sveltia reads this Decap-format config unchanged.
 #
-# SETUP STILL REQUIRED (Phase B, not needed for the first review):
-#   Decap's GitHub backend needs an OAuth handler. Options:
-#     - Deploy an OAuth proxy (small Cloudflare Worker; several open-source ones)
-#       and set `base_url` + `auth_endpoint` below, OR
-#     - Use a hosted OAuth service.
+# ONE-TIME AUTH SETUP (to make login work):
+#   1. Create a GitHub OAuth App (on any account with push access to the repo):
+#        GitHub → Settings → Developer settings → OAuth Apps → New.
+#        - Homepage URL:  https://allisondvm.com
+#        - Authorization callback URL:  https://<auth-worker-host>/callback
+#      Note the Client ID + generate a Client Secret.
+#   2. Deploy the Sveltia auth broker (a small Cloudflare Worker,
+#      github.com/sveltia/sveltia-cms-auth) with those as GITHUB_CLIENT_ID /
+#      GITHUB_CLIENT_SECRET. It gives you the <auth-worker-host>.
+#   3. Set `base_url` below to that worker origin, redeploy the site.
 #   Until then, /admin loads but cannot authenticate. The public site is
 #   unaffected.
 backend:
   name: github
   repo: Allisondvm/allison-dvm-site
   branch: main
-  # base_url: https://<oauth-proxy-host>     # set during Phase B
-  # auth_endpoint: /auth
+  # base_url: https://<auth-worker-host>   # set after the Worker is deployed
 
 # Store uploaded images alongside the site's static assets.
 media_folder: "public/uploads"

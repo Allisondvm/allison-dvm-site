@@ -7,9 +7,10 @@
     <title>Content Manager — allisondvm.com</title>
   </head>
   <body>
-    <!-- Decap CMS: a visual editor that commits content to the GitHub repo.
-         Requires a GitHub OAuth backend (see admin/config.yml). Until the OAuth
-         app is wired up, this page loads but cannot log in. -->
-    <script src="https://unpkg.com/decap-cms@^3.8.4/dist/decap-cms.js"></script>
+    <!-- Sveltia CMS: a modern, mobile-friendly visual editor that commits
+         content to the GitHub repo. Drop-in compatible with Decap config
+         (admin/config.yml). Better UX than Decap for a non-technical author
+         on a phone. Needs a GitHub OAuth broker (see admin/config.yml). -->
+    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
   </body>
 </html>

@@ -31,5 +31,16 @@ pnpm check:contrast # verify palette meets WCAG 2.1 AA
 
 ## License
 
-Code is MIT licensed (see `LICENSE`). Site content, text, and the likeness and
-identity of Krista Allison are © Krista Allison and not covered by the code license.
+This repository is **dual-licensed** to keep the code open while protecting the writing:
+
+- **Code** — [MIT](LICENSE). The Astro scaffolding, components, config, and tooling are free
+  to reuse.
+- **Content** — [CC BY-NC-ND 4.0](LICENSE-CONTENT). The pages and prose under `src/content/`,
+  the CV text, and any authored writing may be shared with attribution, but not used
+  commercially or redistributed in modified form.
+
+### Content and branding
+
+The name "Krista Allison, DVM", the domain allisondvm.com, the site's visual identity, and
+Krista's personal identity, likeness, and photographs are **not** licensed for reuse. Fork the
+code, not the person. Listed publications remain under their journals' copyright.

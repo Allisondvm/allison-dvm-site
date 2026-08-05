@@ -1,6 +1,11 @@
-MIT License
+MIT License (code)
 
 Copyright (c) 2026 Krista Allison
+
+This license applies to the SOURCE CODE of this repository (the Astro site
+scaffolding, components, configuration, styles, and build tooling). It does NOT
+apply to the written content or branding — see LICENSE-CONTENT and the "Content
+and branding" section of the README.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +24,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-Note: This license covers the site's source code only. Site content, text,
-photographs, and the likeness and professional identity of Krista Allison are
-© Krista Allison and are not licensed for reuse.

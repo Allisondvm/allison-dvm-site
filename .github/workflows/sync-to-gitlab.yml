@@ -5,8 +5,8 @@ name: Sync to GitLab
 #
 # Required repository secrets:
 #   GITLAB_TOKEN         - GitLab project access token with write_repository
-#   GITLAB_HOST          - e.g. gitlab.probablyfine.dev
-#   GITLAB_PROJECT_PATH  - e.g. root/allison-dvm-site
+#   GITLAB_HOST          - GitLab host, e.g. gitlab.example.com
+#   GITLAB_PROJECT_PATH  - project path, e.g. group/allison-dvm-site
 
 on:
   push:

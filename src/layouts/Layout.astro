@@ -91,6 +91,14 @@ const personLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage.href} />
     <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+    {/* Self-hosted, privacy-friendly analytics (Umami). Served first-party from
+        /pf-insights/* so ad-blockers don't drop it as a third-party tracker.
+        Traefik proxies /pf-insights/* to the Umami service (see ingressroute). */}
+    <script
+      defer
+      src="/pf-insights/script.js"
+      data-website-id="6a4d9510-ac99-483b-81fd-92bcd2a4fc53"
+    ></script>
   </head>
   <body class="min-h-screen flex flex-col">
     {bare ? (

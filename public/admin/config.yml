@@ -1,0 +1,60 @@
+# Decap CMS configuration — visual editor for allisondvm.com
+#
+# Backend: GitHub. Krista logs in with GitHub and edits content through a form
+# UI; Decap commits to this repo and CI rebuilds + deploys.
+#
+# SETUP STILL REQUIRED (Phase B, not needed for the first review):
+#   Decap's GitHub backend needs an OAuth handler. Options:
+#     - Deploy an OAuth proxy (small Cloudflare Worker; several open-source ones)
+#       and set `base_url` + `auth_endpoint` below, OR
+#     - Use a hosted OAuth service.
+#   Until then, /admin loads but cannot authenticate. The public site is
+#   unaffected.
+backend:
+  name: github
+  repo: Allisondvm/allison-dvm-site
+  branch: main
+  # base_url: https://<oauth-proxy-host>     # set during Phase B
+  # auth_endpoint: /auth
+
+# Store uploaded images alongside the site's static assets.
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+# Editorial workflow gives drafts a review step before publish.
+publish_mode: editorial_workflow
+
+collections:
+  - name: "posts"
+    label: "Blog posts"
+    folder: "src/content/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Tags", name: "tags", widget: "list", default: [] }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "publications"
+    label: "Publications & presentations"
+    folder: "src/content/publications"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Authors", name: "authors", widget: "string" }
+      - { label: "Venue", name: "venue", widget: "string" }
+      - { label: "Year", name: "year", widget: "number", value_type: "int" }
+      - {
+          label: "Kind",
+          name: "kind",
+          widget: "select",
+          options: ["article", "presentation"],
+          default: "article",
+        }
+      - { label: "DOI", name: "doi", widget: "string", required: false }
+      - { label: "URL", name: "url", widget: "string", required: false }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 999 }

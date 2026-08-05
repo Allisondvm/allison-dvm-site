@@ -1,0 +1,16 @@
+# build output
+dist/
+.astro/
+
+# deps
+node_modules/
+
+# os / editor
+.DS_Store
+*.log
+.vscode/
+
+# local env
+.env
+.env.*
+!.env.example

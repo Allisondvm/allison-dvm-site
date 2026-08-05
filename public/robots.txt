@@ -1,0 +1,7 @@
+# PRE-LAUNCH: private review. Ask crawlers not to index yet.
+# On go-live, replace with:
+#   User-agent: *
+#   Allow: /
+#   Sitemap: https://allisondvm.com/sitemap-index.xml
+User-agent: *
+Disallow: /

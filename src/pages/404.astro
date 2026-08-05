@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Page not found — Krista Allison, DVM" description="That page could not be found.">
+  <section class="max-w-2xl mx-auto px-6 pt-24 pb-24 text-center">
+    <p class="text-6xl font-serif text-[--color-accent]">404</p>
+    <h1 class="text-2xl mt-4">This page could not be found</h1>
+    <p class="mt-4 text-[--color-ink-dim]">
+      The link may be old or mistyped. Let's get you back on track.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3 justify-center">
+      <a
+        href="/"
+        class="inline-flex items-center rounded-md bg-[--color-accent] px-5 py-2.5 text-white no-underline hover:no-underline hover:bg-[--color-accent-strong] transition-colors"
+      >
+        Home
+      </a>
+      <a
+        href="/about"
+        class="inline-flex items-center rounded-md border border-[--color-line] px-5 py-2.5 text-[--color-ink] no-underline hover:no-underline hover:border-[--color-accent] transition-colors"
+      >
+        About
+      </a>
+    </div>
+  </section>
+</Layout>

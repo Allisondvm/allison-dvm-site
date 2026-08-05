@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const items = (await getCollection('publications')).sort(
+  (a, b) => a.data.order - b.data.order || b.data.year - a.data.year,
+);
+const articles = items.filter((i) => i.data.kind === 'article');
+const talks = items.filter((i) => i.data.kind === 'presentation');
+---
+
+<Layout
+  title="Publications — Krista Allison, DVM"
+  description="Peer-reviewed publications and research presentations by Krista Allison, DVM (published as Wood, K.)."
+>
+  <section class="max-w-4xl mx-auto px-6 pt-16 pb-4">
+    <h1 class="text-4xl">Publications &amp; Presentations</h1>
+    <p class="mt-4 text-[--color-ink-dim] max-w-2xl">
+      Published under my maiden name, Wood, K. Also listed on
+      <a href="https://scholar.google.com/citations?user=eGKo0RQAAAAJ" rel="me noopener">Google Scholar</a>
+      and
+      <a href="https://orcid.org/0009-0008-4308-0318" rel="me noopener">ORCID</a>.
+    </p>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 pb-16">
+    <h2 class="text-2xl mt-8 mb-4 border-b border-[--color-line] pb-2">Peer-reviewed articles</h2>
+    <ol class="space-y-6">
+      {
+        articles.map((p) => (
+          <li>
+            <p class="text-[--color-ink] font-medium">{p.data.title}</p>
+            <p class="text-[--color-ink-dim] text-sm mt-1">{p.data.authors}</p>
+            <p class="text-[--color-ink-dim] text-sm">
+              <em>{p.data.venue}</em>, {p.data.year}
+              {p.data.doi && (
+                <>
+                  {' '}&middot;{' '}
+                  <a href={`https://doi.org/${p.data.doi}`} rel="noopener">doi:{p.data.doi}</a>
+                </>
+              )}
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <h2 class="text-2xl mt-12 mb-4 border-b border-[--color-line] pb-2">Research presentations</h2>
+    <ol class="space-y-6">
+      {
+        talks.map((p) => (
+          <li>
+            <p class="text-[--color-ink] font-medium">{p.data.title}</p>
+            <p class="text-[--color-ink-dim] text-sm mt-1">{p.data.authors}</p>
+            <p class="text-[--color-ink-dim] text-sm">
+              <em>{p.data.venue}</em>, {p.data.year}
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</Layout>

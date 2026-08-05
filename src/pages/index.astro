@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <section class="max-w-4xl mx-auto px-6 pt-20 pb-16">
+    <div class="grid md:grid-cols-[1.4fr_1fr] gap-10 items-center">
+      <div>
+        <p class="text-sm text-[--color-accent] font-medium tracking-wide uppercase">
+          Veterinarian &middot; Clinical Research &middot; Animal-Health Science
+        </p>
+        <h1 class="mt-3 text-4xl sm:text-5xl leading-tight">Krista Allison, DVM</h1>
+        <p class="mt-5 text-lg text-[--color-ink] max-w-2xl">
+          A veterinarian and clinical researcher bringing hands-on patient care
+          into animal-health science: pharmacovigilance, drug safety, and
+          medical affairs.
+        </p>
+        <p class="mt-4 text-[--color-ink-dim] max-w-2xl">
+          Six years at the exam table, a research background before it, and a
+          belief that the best science starts with the patient in front of you.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href="/cv"
+            class="inline-flex items-center rounded-md bg-[--color-accent] px-5 py-2.5 text-white no-underline hover:no-underline hover:bg-[--color-accent-strong] transition-colors"
+          >
+            View CV
+          </a>
+          <a
+            href="/about"
+            class="inline-flex items-center rounded-md border border-[--color-line] px-5 py-2.5 text-[--color-ink] no-underline hover:no-underline hover:border-[--color-accent] transition-colors"
+          >
+            About Krista
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center rounded-md border border-[--color-line] px-5 py-2.5 text-[--color-ink] no-underline hover:no-underline hover:border-[--color-accent] transition-colors"
+          >
+            Get in touch
+          </a>
+        </div>
+      </div>
+      <div class="justify-self-center md:justify-self-end">
+        <img
+          src="/krista.jpg"
+          alt="Krista Allison, DVM, in a white coat holding a calico cat"
+          width="320"
+          height="400"
+          class="rounded-xl border border-[--color-line] object-cover w-[240px] h-[300px] sm:w-[280px] sm:h-[350px]"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[--color-surface-alt] border-y border-[--color-line]">
+    <div class="max-w-4xl mx-auto px-6 py-14 grid sm:grid-cols-3 gap-8">
+      <div>
+        <h2 class="text-xl">Clinical depth</h2>
+        <p class="mt-2 text-[--color-ink-dim]">
+          Six years across small animal, large animal, equine, and exotic
+          medicine, from a solo practice to a high-volume hospital.
+        </p>
+      </div>
+      <div>
+        <h2 class="text-xl">Research background</h2>
+        <p class="mt-2 text-[--color-ink-dim]">
+          Peer-reviewed publications in cancer and neuroscience, plus formal
+          research presentations, before and alongside clinical work.
+        </p>
+      </div>
+      <div>
+        <h2 class="text-xl">Industry focus</h2>
+        <p class="mt-2 text-[--color-ink-dim]">
+          Moving point-of-care experience into pharmacovigilance, drug safety,
+          and medical affairs, where decisions reach animals she will never meet.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,46 @@
+name: Sync to GitLab
+
+# Mirrors the public source of truth (GitHub) into the GitLab instance, one-way:
+#   GitHub (main, tags)  ->  GitLab
+#
+# Required repository secrets:
+#   GITLAB_TOKEN         - GitLab project access token with write_repository
+#   GITLAB_HOST          - e.g. gitlab.probablyfine.dev
+#   GITLAB_PROJECT_PATH  - e.g. root/allison-dvm-site
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-to-gitlab
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Push to GitLab
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push main and tags to GitLab
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+          GITLAB_HOST: ${{ secrets.GITLAB_HOST }}
+          GITLAB_PROJECT_PATH: ${{ secrets.GITLAB_PROJECT_PATH }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GITLAB_TOKEN:-}" ] || [ -z "${GITLAB_HOST:-}" ] || [ -z "${GITLAB_PROJECT_PATH:-}" ]; then
+            echo "GitLab secrets not set; skipping mirror."
+            exit 0
+          fi
+          git remote add gitlab "https://oauth2:${GITLAB_TOKEN}@${GITLAB_HOST}/${GITLAB_PROJECT_PATH}.git"
+          git push gitlab --force --all
+          git push gitlab --force --tags

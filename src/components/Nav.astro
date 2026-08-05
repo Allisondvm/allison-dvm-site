@@ -1,0 +1,46 @@
+---
+const { pathname } = Astro.url;
+const isActive = (href: string) =>
+  href === '/' ? pathname === '/' : pathname.startsWith(href);
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/cv', label: 'CV' },
+  { href: '/publications', label: 'Publications' },
+  { href: '/blog', label: 'Writing' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+
+<header class="border-b border-[--color-line] bg-[--color-surface]">
+  <nav
+    aria-label="Primary"
+    class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between gap-4"
+  >
+    <a
+      href="/"
+      class="font-serif text-lg text-[--color-ink] no-underline hover:no-underline"
+    >
+      Krista Allison<span class="text-[--color-accent]">, DVM</span>
+    </a>
+    <div class="flex items-center gap-x-5 gap-y-1 flex-wrap justify-end text-sm">
+      {
+        links.slice(1).map((l) => (
+          <a
+            href={l.href}
+            aria-current={isActive(l.href) ? 'page' : undefined}
+            class:list={[
+              'no-underline hover:no-underline transition-colors',
+              isActive(l.href)
+                ? 'text-[--color-accent] font-medium'
+                : 'text-[--color-ink-dim] hover:text-[--color-accent]',
+            ]}
+          >
+            {l.label}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+</header>

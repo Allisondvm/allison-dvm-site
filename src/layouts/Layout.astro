@@ -1,0 +1,108 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  bare?: boolean;
+}
+
+const {
+  title = 'Krista Allison, DVM',
+  description = 'Veterinarian and clinical researcher bringing hands-on patient care into animal-health science: pharmacovigilance, drug safety, and medical affairs.',
+  bare = false,
+} = Astro.props;
+
+// Flat-file build makes Astro.url.pathname carry .html at build time, but nginx
+// serves + everyone links the clean URL. Strip .html (and /index) so canonical
+// matches the real URL and doesn't signal duplicate content.
+let cleanPath = Astro.url.pathname.replace(/\.html$/, '');
+if (cleanPath.endsWith('/index')) cleanPath = cleanPath.slice(0, -'index'.length);
+const canonical = new URL(cleanPath || '/', Astro.site ?? 'https://allisondvm.com');
+const ogImage = new URL('/og.png?v=1', Astro.site ?? 'https://allisondvm.com');
+
+// PRE-LAUNCH: the site is in private review. Keep it out of search indexes until
+// Krista green-lights going live. Flip PREINDEX_NOINDEX to false on launch (also
+// switch robots.txt + remove the nginx X-Robots-Tag header + Traefik chain).
+const PRELAUNCH_NOINDEX = true;
+
+// Structured data: helps search + recruiter tools resolve her as one entity.
+// Note maiden name "Wood" under which her publications are indexed.
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Krista Allison',
+  alternateName: 'Krista Wood',
+  url: 'https://allisondvm.com',
+  jobTitle: 'Veterinarian (DVM)',
+  description:
+    'Veterinarian with clinical and research experience moving into animal-health industry roles: pharmacovigilance, drug safety, and medical affairs.',
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'Auburn University College of Veterinary Medicine' },
+    { '@type': 'CollegeOrUniversity', name: 'University of Montevallo' },
+  ],
+  knowsAbout: [
+    'Pharmacovigilance',
+    'Drug Safety',
+    'Clinical Research',
+    'Veterinary Medicine',
+    'Medical Affairs',
+    'Scientific Writing',
+  ],
+  sameAs: [
+    'https://www.linkedin.com/in/krista-allison-6b597a365/',
+    'https://scholar.google.com/citations?user=eGKo0RQAAAAJ',
+    'https://orcid.org/0009-0008-4308-0318',
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#f6f4f1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    {PRELAUNCH_NOINDEX && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={ogImage.href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage.href} />
+    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    {bare ? (
+      <slot />
+    ) : (
+      <>
+        <a href="#main-content" class="skip-link">Skip to content</a>
+        <Nav />
+        <main id="main-content" tabindex="-1" class="flex-1">
+          <slot />
+        </main>
+        <Footer />
+      </>
+    )}
+  </body>
+</html>

@@ -1,0 +1,179 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Print-styled CV, rendered to public/cv.pdf via scripts/gen-cv.mjs.
+// Content mirrors PROFILE.md; keep this and the PDF in sync.
+const experience = [
+  {
+    role: 'Associate Veterinarian',
+    org: 'Corporate small-animal hospital group',
+    dates: 'May 2025 – Present',
+    points: [
+      'Consistently ranked among the top associate producers in the region, reflecting strong clinical throughput in a high-volume corporate environment.',
+      'Developed and delivered educational content for student externs, preceptors, and staff pursuing LVT licensure, translating complex clinical concepts into accessible training.',
+      'Recognized with a quarterly organizational award for teamwork, excellence, and professional growth.',
+    ],
+  },
+  {
+    role: 'Associate Veterinarian',
+    org: 'Small-animal clinic',
+    dates: 'Jan 2024 – May 2025',
+    points: [
+      'Expanded procedural expertise across complex soft-tissue, orthopedic, and dental surgery.',
+      'Delivered staff presentations on Fear Free handling, anesthesia, and triage protocols.',
+      'Advanced diagnostic proficiency in radiograph, ultrasound, and cytology interpretation.',
+    ],
+  },
+  {
+    role: 'Associate Veterinarian',
+    org: 'Small-animal hospital',
+    dates: 'Dec 2022 – Dec 2023',
+    points: [
+      'Managed a high-volume caseload of routine and urgent care, building rapid diagnostic and triage decision-making.',
+      'Performed advanced emergency procedures including thoracocentesis, abdominocentesis, and blood transfusions; furthered critical-care capabilities.',
+    ],
+  },
+  {
+    role: 'Associate / Sole Veterinarian',
+    org: 'Multi-location practice',
+    dates: 'May 2021 – Sep 2022',
+    points: [
+      'Served as sole veterinarian at one location, independently managing clinical operations, staff training, and protocol development.',
+      'Implemented new clinical protocols and updated equipment standards, improving practice-wide standard of care.',
+      'Managed a diverse caseload across small-animal internal medicine, soft-tissue surgery, dental procedures, and preventive care.',
+    ],
+  },
+  {
+    role: 'Relief / Independent Contractor Veterinarian',
+    org: 'Multiple practices',
+    dates: 'Aug 2020 – May 2021',
+    points: [
+      'Delivered care across equine, small-animal, and exotic species in multiple practice environments, demonstrating adaptability and breadth.',
+      'Presented at staff meetings on technician utilization, client history-taking, and vaccination protocols.',
+      'Operated independently with limited resources, building strong self-directed workflows suited to remote industry roles.',
+    ],
+  },
+];
+---
+
+<Layout
+  title="CV — Krista Allison, DVM"
+  description="Curriculum vitae: veterinarian with clinical and research experience, moving into pharmacovigilance, drug safety, and medical affairs."
+>
+  <section class="max-w-4xl mx-auto px-6 pt-16 pb-6 flex flex-wrap items-end justify-between gap-4 print:hidden">
+    <h1 class="text-4xl">Curriculum Vitae</h1>
+    <button
+      type="button"
+      id="print-cv"
+      class="inline-flex items-center rounded-md bg-[--color-accent] px-5 py-2.5 text-white no-underline hover:no-underline hover:bg-[--color-accent-strong] transition-colors cursor-pointer"
+    >
+      Print / Save as PDF
+    </button>
+  </section>
+
+  <article class="max-w-4xl mx-auto px-6 pb-20">
+    <div class="cv-name hidden print:block">
+      <h1 class="text-3xl">Krista Allison, DVM</h1>
+      <p class="text-[--color-ink-dim]">
+        Veterinarian &middot; Clinical Research &middot; Pharmacovigilance / Drug Safety / Medical Affairs
+      </p>
+    </div>
+
+    <p class="text-[--color-ink] max-w-2xl">
+      Versatile veterinarian with six years of clinical experience across small
+      animal, large animal, equine, and high-volume practice, plus a research
+      background with peer-reviewed publications and formal presentations. Proven
+      ability to synthesize complex medical information, translate science for
+      diverse audiences, and collaborate across multidisciplinary teams. Seeking
+      a role that applies deep clinical expertise to scientific development in
+      pharmacovigilance, drug safety, or medical affairs.
+    </p>
+
+    <h2 class="text-2xl mt-12 mb-4 border-b border-[--color-line] pb-2">Experience</h2>
+    <div class="space-y-8">
+      {
+        experience.map((job) => (
+          <div>
+            <div class="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 class="text-lg">
+                {job.role}
+                <span class="text-[--color-ink-dim] font-normal">— {job.org}</span>
+              </h3>
+              <span class="text-sm text-[--color-ink-dim]">{job.dates}</span>
+            </div>
+            <ul class="mt-2 pl-5 list-disc space-y-1 text-[--color-ink]">
+              {job.points.map((p) => <li>{p}</li>)}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-10 mt-12">
+      <div>
+        <h2 class="text-2xl mb-4 border-b border-[--color-line] pb-2">Education</h2>
+        <div class="space-y-4 text-[--color-ink]">
+          <div>
+            <p class="font-medium">Doctor of Veterinary Medicine (DVM)</p>
+            <p class="text-[--color-ink-dim]">Auburn University College of Veterinary Medicine, 2020</p>
+            <p class="text-sm text-[--color-ink-dim]">VBMA Business Certificate; Boehringer Ingelheim Veterinary Scholarship</p>
+          </div>
+          <div>
+            <p class="font-medium">BS Biology, Minor in Chemistry</p>
+            <p class="text-[--color-ink-dim]">University of Montevallo, 2015</p>
+            <p class="text-sm text-[--color-ink-dim]">Beta Beta Beta National Biological Honor Society</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-2xl mb-4 border-b border-[--color-line] pb-2">Certifications</h2>
+        <ul class="pl-5 list-disc space-y-1 text-[--color-ink]">
+          <li>Fear Free Certified (2022–present)</li>
+          <li>American Veterinary Medical Association (AVMA), 2020–present</li>
+          <li>American Association of Industry Veterinarians (AAIV), 2026–present</li>
+        </ul>
+        <h2 class="text-2xl mt-8 mb-4 border-b border-[--color-line] pb-2">Core competencies</h2>
+        <p class="text-[--color-ink]">
+          Clinical research &amp; study design, scientific writing, protocol
+          development, staff training, cross-functional collaboration,
+          multi-species clinical expertise, diagnostics, data interpretation.
+        </p>
+      </div>
+    </div>
+
+    <h2 class="text-2xl mt-12 mb-4 border-b border-[--color-line] pb-2">
+      Selected publications &amp; presentations
+    </h2>
+    <p class="text-sm text-[--color-ink-dim] mb-3">
+      Published under maiden name, Wood, K. Full list on the
+      <a href="/publications">publications page</a>.
+    </p>
+    <ul class="pl-5 list-disc space-y-1 text-[--color-ink]">
+      <li>
+        Wood, K., et al. Cyclic GMP Signaling during Human Lactation and Breast
+        Cancer. <em>The Breast Journal</em>, 2019.
+      </li>
+      <li>
+        Rubio, M.D., Wood, K., et al. Dysfunction of the Ubiquitin Proteasome and
+        Ubiquitin-Like Systems in Schizophrenia. <em>Neuropsychopharmacology</em>, 2013.
+      </li>
+    </ul>
+  </article>
+</Layout>
+
+<style>
+  @media print {
+    :global(header),
+    :global(footer),
+    :global(.skip-link) {
+      display: none !important;
+    }
+    :global(body) {
+      background: #fff;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('print-cv')?.addEventListener('click', () => window.print());
+</script>

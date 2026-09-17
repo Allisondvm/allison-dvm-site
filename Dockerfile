@@ -20,7 +20,7 @@ COPY . .
 RUN pnpm build
 
 # ---- Runtime stage ----
-FROM nginx:1.27-alpine AS runtime
+FROM nginx:1.31-alpine AS runtime
 
 # Serve on 8080 as an unprivileged user (uid 101 = nginx).
 COPY nginx.conf /etc/nginx/nginx.conf

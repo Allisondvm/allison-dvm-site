@@ -1,0 +1,48 @@
+# Dependabot keeps the three inputs of this site current: the npm dependency
+# tree, the GitHub Actions the workflows pin, and the base images the
+# Dockerfile builds from. Weekly on Monday so a week's updates land together;
+# npm minor and patch bumps arrive as one grouped pull request.
+#
+# This repository is GitHub-authoritative and mirrors one way into GitLab for
+# CI, so update automation lives here and not on the mirror.
+
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "deps"
+    labels:
+      - dependencies
+    groups:
+      npm-dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: "ci"
+    labels:
+      - dependencies
+      - ci
+
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: "deps"
+    labels:
+      - dependencies
